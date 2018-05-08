@@ -108,7 +108,8 @@ let d = 4
 
 ### this
 
-```// 简单的 this 题目
+```
+// 简单的 this 题目
 var x = 0
 function test() {
     console.log(this.x)
