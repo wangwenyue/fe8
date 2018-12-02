@@ -34,9 +34,23 @@ const test2 = () => {
 // ### after b[1, 2, 5]
 // ### after a[1, 2, 3]
 
+const test3 = () => {
+  const a = [1, [1, 2, 3], [4, 5]]
+  const b = a.slice()
+  log('before b', b)
+  b[1][1] = 5
+  log('after b', b)
+  log('after a', a)
+}
+
+// ### before b[1, [1, 2, 3], [4, 5]]
+// ### after b[1, [1, 5, 3], [4, 5]]
+// ### after a[1, [1, 5, 3], [4, 5]]
+
 const __main = () => {
-  test1()
-  test2()
+  // test1()
+  // test2()
+  test3()
 }
 
 __main()
