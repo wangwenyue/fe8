@@ -18,6 +18,9 @@ const test1 = () => {
   log('after b', b)
   log('after a', a)
 }
+// ### before b { a: 1, arr: [1, 2, 3] }
+// ### after b { a: 1, arr: [5, 2, 3] }
+// ### after a { a: 1, arr: [5, 2, 3] }
 
 const test2 = () => {
   const a = [1, 2, 3,]
@@ -27,6 +30,9 @@ const test2 = () => {
   log('after b', b)
   log('after a', a)
 }
+// ### before b[1, 2, 3]
+// ### after b[1, 2, 5]
+// ### after a[1, 2, 3]
 
 const __main = () => {
   test1()
