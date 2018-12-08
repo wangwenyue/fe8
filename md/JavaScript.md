@@ -326,13 +326,15 @@ console.log(new Date(), i)
 ## Ajax 过程：
 Ajax: 浏览器提供的使用 `HTTP` 协议收发数据的接口
 
-// 0 1 2 3 4 各代表什么含义
-// 0 代理被创建，但并未 open()
-// 1 已经调用 open()
-// 2 已经调用 send() 并且头部和状态已经获得了
-// 3 正在下载
-// 4 下载完成
+```
+0 1 2 3 4 各代表什么含义
 
+0 代理被创建，但并未 open()
+1 已经调用 open()
+2 已经调用 send() 并且头部和状态已经获得了
+3 正在下载
+4 下载完成
+```
 ```JavaScript
 const ajax = (method, path, data, responseCallback) => {
     // 发送登录数据
