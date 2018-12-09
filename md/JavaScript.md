@@ -347,3 +347,73 @@ console.log(new Date(), i)
 
 防抖动和节流本质是不一样的。
 防抖动是将多次执行变为最后一次执行，节流是将多次执行变成每隔一段时间执行。
+
+## 继承
+
+```js
+// 要让 B 继承 A
+function A() {}
+function B() {}
+```
+
+### 1. 绑定构造函数
+
+使用call或apply方法，将父对象的构造函数绑定在子对象上，即在子对象构造函数中加一行：
+
+```js
+function B() {
+    A.apply(this, arguments)
+}
+```
+
+### 2. `prototype` 模式
+如果 `B` 的 `prototype` 对象，指向一个 `A` 的实例，那么所有 `B` 的实例，就能继承 `A` 了。
+
+```js
+B.prototype = new A()
+// 这一行是为了把 B 的构造函数重新指向 B
+B.prototype.constructor = B
+```
+
+### 3.直接继承 `prototype`
+
+```js
+B.prototype = A.prototype
+// 这一行是为了把 B 的构造函数重新指向 B
+B.prototype.constructor = B
+```
+与前一种方法相比，这样做的优点是效率比较高（不用执行和建立 `A` 的实例了），比较省内存。缺点是 `B.prototype` 和 `A.prototype` 现在指向了同一个对象，那么任何对 `B.prototype` 的修改，都会反映到 `A.prototype` 。
+
+这种做法有个问题，把 `A` 的构造函数也指向 `B` 了。
+
+### 利用空对象作为中介
+
+由于"直接继承prototype"存在上述的缺点，所以就有第四种方法，利用一个空对象作为中介。
+
+直接封装成一个 `extend` 函数
+
+```js
+function extend(Child, Parent) {
+    var Foo = function() {}
+    Foo.prototype = Parent.prototype
+    Child.prototype = new Foo()
+    Child.prototype.constructor = Child
+}
+
+// 使用方法
+extend(B, A)
+```
+
+### 拷贝继承
+
+把父对象的所有属性和方法，拷贝进子对象，实现继承。
+
+```js
+function extend2(Child, Parent) {
+    var p = Parent.prototype
+    var c = Child.prototype
+    for (var i in p) {
+        c[i] = p[i]
+    }
+}
+```
