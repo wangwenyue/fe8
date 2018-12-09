@@ -200,3 +200,94 @@ Body部分略过
 4. 服务器处理请求并返回 HTTP 报文
 5. 浏览器解析渲染页面
 6. 断开连接：TCP 四次挥手
+
+## Ajax 过程：
+Ajax: 浏览器提供的使用 `HTTP` 协议收发数据的接口
+
+```
+0 1 2 3 4 各代表什么含义
+
+0 代理被创建，但并未 open()
+1 已经调用 open()
+2 已经调用 send() 并且头部和状态已经获得了
+3 正在下载
+4 下载完成
+```
+```JavaScript
+const ajax = (method, path, data, responseCallback) => {
+    // 发送登录数据
+    let r = new XMLHttpRequest()
+    // 设置请求方法和请求地址
+    r.open(method, path, true)
+    // 设置发送的数据的格式
+    r.setRequestHeader('Content-Type', 'application/json')
+    // 注册响应函数
+    r.onreadystatechange = () => {
+        if(r.readyState == 4) {
+            const response = JSON.parse(r.response)
+            responseCallback(response)
+        }
+    }
+    r.send(data)
+}
+```
+
+## 事件冒泡, 事件委托
+
+事件触发有三个阶段
+
+- `window` 往事件触发处传播，遇到注册的捕获事件会触发
+- 传播到事件触发处时触发注册的事件
+- 从事件触发处往 `window` 传播，遇到注册的冒泡事件会触发
+
+事件触发一般来说会按照上面的顺序进行，但是也有特例，如果给一个目标节点同时注册冒泡和捕获事件，事件触发会按照注册的顺序执行。
+
+```js
+// 以下会先打印冒泡然后是捕获
+node.addEventListener('click', event =>{
+    console.log('冒泡')
+}, false)
+
+node.addEventListener('click', event =>{
+    console.log('捕获 ')
+}, true)
+```
+
+一般来说，我们只希望事件只触发在目标上，这时候可以使用 `stopPropagation` 来阻止事件的进一步传播。通常我们认为 `stopPropagation` 是用来阻止事件冒泡的，其实该函数也可以阻止捕获事件。`stopImmediatePropagation` 同样也能实现阻止事件，但是还能阻止该事件目标执行别的注册事件。
+
+```js
+node.addEventListener('click', event =>{
+    event.stopImmediatePropagation()
+    console.log('冒泡')
+}, false)
+// 点击 node 只会执行上面的函数，该函数不会执行
+node.addEventListener('click', event => {
+    console.log('捕获 ')
+}, true)
+```
+## 事件委托
+
+如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上
+
+```html
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<script>
+    let ul = document.querySelector('##ul')
+    ul.addEventListener('click', event => {
+        console.log(event.target)
+    })
+</script>
+```
+
+如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上。
+
+事件代理的方式相对于直接给目标注册事件来说，有以下优点:
+
+- 节省内存
+- 不需要给子节点注销事件
