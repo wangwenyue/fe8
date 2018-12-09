@@ -102,7 +102,7 @@ React 最初的设计，整个渲染过程都是同步的。同步的意思是�
 
 为什么不在 `componentWillMount` 里去做 `AJAX`？`componentWillMount` 可是比 `componentDidMount` 更早调用啊，更早调用意味着更早返回结果，那样性能不是更高吗？
 
-首先，一个组件的 `componentWillMount` 比 `componentDidMount` 也早调用不了几微秒，性能没啥提高；而且，等到异步渲染开启的时候，`componentWillMount` 就可能被中途打断，中断之后渲染又要重做一遍，想一想，在 `componentWillMount` 中做 `AJAX` 调用，代码里看到只有调用一次，但是实际上可能调用 N 多次，这明显不合适。相反，若把 `AJAX` 放在 `componentDidMount，因为` `componentDidMount` 在第二阶段，所以绝对不会多次重复调用，这才是 `AJAX` 合适的位置。
+首先，一个组件的 `componentWillMount` 比 `componentDidMount` 也早调用不了几微秒，性能没啥提高；而且，等到异步渲染开启的时候，`componentWillMount` 就可能被中途打断，中断之后渲染又要重做一遍，想一想，在 `componentWillMount` 中做 `AJAX` 调用，代码里看到只有调用一次，但是实际上可能调用 N 多次，这明显不合适。相反，若把 `AJAX` 放在 `componentDidMount`，因为 `componentDidMount` 在第二阶段，所以绝对不会多次重复调用，这才是 `AJAX` 合适的位置。
 
 `React v16.3` 之后的完整的生命周期函数图：
 
