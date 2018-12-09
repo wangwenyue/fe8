@@ -64,6 +64,25 @@ children {
     trnasform: translateY(-50%);
 }
 ```
+## position
+
+`position` 用于网页元素的定位，可设置 `static`/`relative`/`absolute`/`fixed` 这些值，其中 `static` 是默认值，不用介绍。
+
+### 定位上下文
+
+`relative` 元素的定位永远是相对于元素自身位置的，和其他元素没关系，也不会影响其他元素。
+
+![relative_position.png](https://raw.githubusercontent.com/wangwenyue/Pic-bed/master/relative_position.png)
+
+`fixed` 元素的定位是相对于 `window` （或者 `iframe`）边界的，和其他元素没有关系。但是它具有破坏性，会导致其他元素位置的变化。
+
+![fixed_position.png](https://raw.githubusercontent.com/wangwenyue/Pic-bed/master/fixed_position.png)
+
+`absolute` 的定位相对于前两者要复杂许多。如果为 `absolute` 设置了 `top`、`left`，浏览器会根据什么去确定它的纵向和横向的偏移量呢？答案是浏览器会递归查找该元素的所有父元素，如果找到一个设置了 `position`: `relative` / `absolute` / `fixed` 的元素，就以该元素为基准定位，如果没找到，就以浏览器边界定位。如下两个图所示：
+
+![absolute_position_1.png](https://raw.githubusercontent.com/wangwenyue/Pic-bed/master/absolute_position_1.png)
+
+![absolute_position_2.png](https://raw.githubusercontent.com/wangwenyue/Pic-bed/master/absolute_position_2.png)
 
 ## 布局
 
