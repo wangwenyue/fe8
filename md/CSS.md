@@ -99,14 +99,25 @@ children {
 <div style="float:right; width:200px;"></div>
 <div style="margin-left: 200px; margin-right: 200px;"></div>
 ```
+- flex 布局
+
+[参考链接](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
 ## float 相关
 
 - `float` 定义：指定一个元素应沿其容器的左侧或右侧放置，允许文本和内联元素环绕它。该元素从网页的正常流动中移除，但仍然保持部分的流动性（与 `absolute` 相反）。
 
 ### 清除浮动方法：
-- 增加一个子元素，设置 `clear: both;`
-- 给最后一个元素设置伪元素 `:after{ content: '', clear: both }`
-- 设置父元素 `overflow: hidden auto;`
+
+[详见](https://github.com/wangwenyue/CSS-me/blob/master/example/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html)
+
+```css
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+```
 
 ## margin 合并
 
