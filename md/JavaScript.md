@@ -389,7 +389,7 @@ B.prototype.constructor = B
 ### 利用空对象作为中介
 
 由于"直接继承prototype"存在上述的缺点，所以就有第四种方法，利用一个空对象作为中介。
-
+git p
 直接封装成一个 `extend` 函数
 
 ```js
