@@ -184,7 +184,8 @@ o.func = foo
 
 o.func(function(){
     return this.gua
-}) // undefined  this 指向 func 中的 argumets，但 arguments是个伪数组，其实是 Object, arguments 中没有 gua 这个字段，所以是 undefined
+}) // undefined  this 指向 func 中的 argumets，但 arguments是个伪数组，其实是 Object, 
+   // arguments 中没有 gua 这个字段，所以是 undefined
 
 var gua = 'name 001'
 var foo = function() {
