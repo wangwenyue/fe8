@@ -266,6 +266,9 @@ console.log(f2.name) // a
 该 `prototype` 对象又具有一个自己的原型，层层向上直到一个对象的原型为 `null`。
 根据定义，`null` 没有原型，并作为这个原型链中的最后一个环节。
 
+`ES5` 继承： `ES5` 是先新建子类的实例对象 `this`，再将父类的属性添加到子类上，导致无法继承原生的构造函数。
+`ES6` 继承： `ES6` 允许继承原生构造函数定义子类，因为 `ES6` 是先新建父类的实例对象 `this`，然后再用子类的构造函数修饰 `this`，使得父类的所有行为都可以继承。
+
 - [Javascript继承机制的设计思想](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 
 - [Javascript 面向对象编程（一）：封装](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html)
