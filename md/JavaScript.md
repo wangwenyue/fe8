@@ -184,7 +184,7 @@ o.func = foo
 
 o.func(function(){
     return this.gua
-}) // undefined  this 指向 func 中的 argumets，但 arguments是个伪数组，其实是 Object, 
+}) // undefined  this 指向 func 中的 argumets，但 arguments是个伪数组，其实是 Object,
    // arguments 中没有 gua 这个字段，所以是 undefined
 
 var gua = 'name 001'
@@ -339,7 +339,7 @@ f3.logName() // name is c  只覆盖了 Foo 上的 name
 
 `ES5` 继承： `ES5` 是先新建子类的实例对象 `this`，再将父类的属性添加到子类上。
 
-`ES6` 继承： `ES6` 允许继承原生构造函数定义子类，因为 `ES6` 是先新建父类的实例对象 `this`，然后再用子类的构造函数修饰 `this`。
+`ES6` 继承： `ES6` 是先新建父类的实例对象 `this`，然后再用子类的构造函数修饰 `this`。
 
 ## `setTimeout` 和 `setInterval` 两者的区别
 
@@ -389,6 +389,8 @@ console.log(new Date(), i)
 防抖动和节流本质是不一样的。
 防抖动是将多次执行变为最后一次执行，节流是将多次执行变成每隔一段时间执行。
 
+lazy-load 用节流
+
 ## 继承
 
 ```js
@@ -430,7 +432,7 @@ B.prototype.constructor = B
 ### 利用空对象作为中介
 
 由于"直接继承prototype"存在上述的缺点，所以就有第四种方法，利用一个空对象作为中介。
-git p
+
 直接封装成一个 `extend` 函数
 
 ```js
@@ -464,6 +466,5 @@ function extend2(Child, Parent) {
 js 语言是单线程，同一时间只能做一件事。
 js 的任务分两种， 同步任务，异步任务。
 同步任务进入主线程执行，形成执行栈，异步任务有了执行结果之后，就放入任务队列。
-主线程的任务执行完之后，就会去执行任务里的任务。
+主线程的任务执行完之后，就会去执行任务队列里的任务。
 不断重复，形成 event loop
-
