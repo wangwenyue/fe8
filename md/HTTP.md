@@ -51,12 +51,33 @@
 - Accept-Language 期望的页面语言
 - **Request Method 请求方法**
 
-# 跨域（jsonp, postMessage, cors, 用服务器(比如 node)转发请求和响应）
+# 跨域（jsonp, postMessage, cors, window.name, 用服务器(比如 node)转发请求和响应）
 
 ## 跨域有哪些常见的解决方式
   - `cors` 设置被跨域服务器，可以接受来自 a.com 的请求（其实是允许某个地址可以访问）
   - `jsonp` ，用 script src 去引用，获取信息
   - 架设 `node` 本地转发请求，或者请求后端转发请求 （这个不是很了解）
+
+## window.name
+
+在客户端浏览器中每个页面都有一个独立的窗口对象 `window`，默认情况下`window.name`为空，在窗口的生命周期中，载入的所有页面共享一个 `window.name` 并且每个页面都有对此读写的权限，`window.name` 会一直存在当前窗口，但存储的`字符串`不超过`2M`。
+
+例子：
+
+```js
+> window.name
+""
+
+> window.name='test'
+"test"
+// 在控制台输入, 不要直接打开网址
+> location.href='http://www.bilibili.com'
+"http://www.bilibili.com"
+Navigated to https://www.bilibili.com/
+
+> window.name
+"test"
+```
 
 ##  `XSS`  跨网站指令码 `Cross-site scripting`
 
@@ -81,28 +102,8 @@
 `xss` 和 `xsrf` 的原理是什么
 `xss` 是 `html` 注入，用户在输入的地方插入 `script` 元素,浏览器会识别为 `JavaScript` 代码，如果这个代码有访问外部服务器，就是 `xss` 攻击
 防治措施是 不信任用户的输入，将 < > 转译为 < &rt; 来处理内容
-csrf 是跨站攻击，拿到了用户的信息之后，伪造用户请求去访问接口
 
-## window.name
-
-在客户端浏览器中每个页面都有一个独立的窗口对象 `window`，默认情况下`window.name`为空，在窗口的生命周期中，载入的所有页面共享一个 `window.name` 并且每个页面都有对此读写的权限，`window.name` 会一直存在当前窗口，但存储的`字符串`不超过`2M`。
-
-例子：
-
-```js
-> window.name
-""
-
-> window.name='test';
-"test"
-
-> location.href='http://www.google.com';
-"http://www.google.com"
-Navigated to https://www.google.com/
-
-> window.name
-"test"
-```
+`csrf` 是跨站攻击，拿到了用户的信息之后，伪造用户请求去访问接口
 
 ## 网址组成（四部分）
 
@@ -154,6 +155,7 @@ Body
 ```html
 GET / HTTP/1.1
 Host: g.cn
+
 ```
 
 `'GET / HTTP/1.1\r\nhost: www.qq.com\r\n\r\n'`
@@ -178,12 +180,14 @@ Location: http://www.google.cn/
 Server: gws
 X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
+
+Body
 ```
 
 Body部分略过
 其中响应行（第一行）：
 - HTTP/1.1 是版本
-- 301 是「状态码」，参见文末链接
+- 301 是「状态码」
 - Moved Permanently 是状态码的描述
 
 浏览器会自己解析Header部分，然后将Body显示成网页
@@ -194,12 +198,12 @@ Body部分略过
 
 总体来说分为以下几个过程:
 
-1. DNS 解析:将域名解析成 IP 地址
-2. TCP 连接：TCP 三次握手
-3. 发送 HTTP 请求
-4. 服务器处理请求并返回 HTTP 报文
+1. `DNS` 解析:将域名解析成 `IP` 地址
+2. `TCP` 连接：`TCP` 三次握手
+3. 发送 `HTTP` 请求
+4. 服务器处理请求并返回 `HTTP` 报文
 5. 浏览器解析渲染页面
-6. 断开连接：TCP 四次挥手
+6. 断开连接：`TCP` 四次挥手
 
 ## Ajax 过程：
 Ajax: 浏览器提供的使用 `HTTP` 协议收发数据的接口
@@ -278,14 +282,12 @@ node.addEventListener('click', event => {
     <li>5</li>
 </ul>
 <script>
-    let ul = document.querySelector('##ul')
+    let ul = document.querySelector('#ul')
     ul.addEventListener('click', event => {
         console.log(event.target)
     })
 </script>
 ```
-
-如果一个节点中的子节点是动态生成的，那么子节点需要注册事件的话应该注册在父节点上。
 
 事件代理的方式相对于直接给目标注册事件来说，有以下优点:
 
