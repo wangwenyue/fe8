@@ -25,7 +25,7 @@ console.log(b.age) // 2
 从上述例子中我们可以发现，如果给一个变量赋值一个对象，那么两者的值会是同一个引用，其中一方改变，另一方也会相应改变。
 通常在开发中我们不希望出现这样的问题，我们可以使用浅拷贝来解决这个问题。[相关链接](https://www.zhihu.com/question/23031215)
 
-### 浅拷贝(shallow copy)
+### 浅拷贝(shallow clone)
 
 首先`深拷贝`和`浅拷贝`只针对像 `Object`, `Array` 这样的复杂对象的。
 简单来说，浅复制只复制一层对象的属性，而深复制则递归复制了所有层级。
@@ -60,7 +60,7 @@ var a = b.concat([])
 ```
 [js slice 是不是浅拷贝？](https://www.zhihu.com/question/56690271)
 
-### 深拷贝(deep copy)
+### 深拷贝(deep clone)
 
 深拷贝一般用 JSON.parse(JSON.stringify(object)) 来解决。
 
@@ -76,6 +76,30 @@ let b = JSON.parse(JSON.stringify(a))
 a.jobs.first = 'native'
 console.log(b.jobs.first) // FE
 ```
+
+另一种实现
+
+```js
+const deepClone = obj => {
+    let clone = {...obj}
+    Object.keys(clone).forEach( k => {
+        if (typeof obj[k] === 'object') {
+            clone[k] = deepClone(obj[k])
+        } else {
+            clone[k] = obj[k]
+        }
+    })
+    if (Array.isArray(obj)) {
+        clone.length = obj.length
+        return Array.from(clone)
+    } else {
+        return clone
+    }
+}
+```
+
+更加专业的方法参考 [deepClone](https://github.com/wangwenyue/lodash-me/blob/master/example/function/deepClone.js)
+
 ## 闭包问题
 
 - 闭包的定义：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 A 就被称为闭包。
