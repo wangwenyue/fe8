@@ -40,7 +40,7 @@ On the date specified in the expiration, the cookie will be removed from the dis
 - 使用方法：
 
 ```JavaScript
-    document.cookie = "yummy_cookie=choco"
-    document.cookie = "tasty_cookie=strawberry"
-    console.log(document.cookie)
+document.cookie = "yummy_cookie=choco"
+document.cookie = "tasty_cookie=strawberry"
+console.log(document.cookie)
 ```
