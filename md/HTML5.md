@@ -27,7 +27,12 @@ Storage.clear() // 清空
 
 ```plaintext
 Types of Cookies
-There are two different types of cookies - session cookies and persistent cookies. If a cookie does not contain an expiration date, it is considered a session cookie. Session cookies are stored in memory and never written to disk. When the browser closes, the cookie is permanently lost from this point on. If the cookie contains an expiration date, it is considered a persistent cookie. On the date specified in the expiration, the cookie will be removed from the disk.
+There are two different types of cookies - session cookies and persistent cookies.
+If a cookie does not contain an expiration date, it is considered a session cookie.
+Session cookies are stored in memory and never written to disk.
+When the browser closes, the cookie is permanently lost from this point on.
+If the cookie contains an expiration date, it is considered a persistent cookie.
+On the date specified in the expiration, the cookie will be removed from the disk.
 ```
 - 可以设置作用域 `domain`, 路径 `path`
 - `secure` 标记 `https` 协议传输
