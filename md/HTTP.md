@@ -70,7 +70,7 @@
 
 > window.name='test'
 "test"
-// 在控制台输入, 不要直接打开网址
+// 在控制台输入, 不要直接打开网址
 > location.href='http://www.bilibili.com'
 "http://www.bilibili.com"
 Navigated to https://www.bilibili.com/
