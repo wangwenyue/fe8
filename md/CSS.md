@@ -64,6 +64,19 @@ children {
     trnasform: translateY(-50%);
 }
 ```
+
+## 水平垂直居中
+[水平垂直居中](https://github.com/wangwenyue/CSS-me/blob/master/example/%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD.html)
+
+## 画三角形
+[画三角形](https://github.com/wangwenyue/CSS-me/blob/master/example/triangle.html)
+
+## 清除浮动
+[清除浮动](https://github.com/wangwenyue/CSS-me/blob/master/example/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8.html)
+
+## 点击改变样式
+[点击改变样式](https://github.com/wangwenyue/CSS-me/blob/master/example/%E7%82%B9%E5%87%BB%E6%94%B9%E5%8F%98%E6%A0%B7%E5%BC%8F.html)
+
 ## position
 
 `position` 用于网页元素的定位，可设置 `static`/`relative`/`absolute`/`fixed` 这些值，其中 `static` 是默认值，不用介绍。
