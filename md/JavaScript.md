@@ -60,6 +60,17 @@ var a = b.concat([])
 ```
 [js slice 是不是浅拷贝？](https://www.zhihu.com/question/56690271)
 
+是浅拷贝，
+
+```js
+var a = [1,2,3, [1, 2, 3]]
+var b = a.slice()
+a === b // false
+a[0] === b[0] // true
+```
+shallow clone 只拷贝一层，`[1, 2, 3]` 就会只拷贝地址了，当 `b[1]` 改变的时候，`a[1]` 会跟着一起变。
+shadow copy 说的是 array 的 elements, 而不是 array 本身; 返回的永远是个新的 array. 也就是说 `b` 是新返回的数组。
+
 ### 深拷贝(deep clone)
 
 深拷贝一般用 JSON.parse(JSON.stringify(object)) 来解决。
