@@ -80,7 +80,7 @@ const deepClone = (p, c={}) => {
     Object.keys(p).forEach( k => {
         if (typeof p[k] === 'object') {
             c[k] = Array.isArray(p[k]) ? [] : {}
-            c[k] = deepClone(p[k])
+            deepClone(p[k], c[k])
         } else {
             c[k] = p[k]
         }
