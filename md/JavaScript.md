@@ -89,7 +89,7 @@ const deepClone = (p, c={}) => {
 }
 ```
 
-`JSON.parse(JSON.stringify(object)) `有缺陷，比如 `function` 就无法拷贝
+`JSON.parse(JSON.stringify(object))` 有缺陷，比如 `function` 就无法拷贝
 
 ```JavaScript
 let a = {
@@ -292,7 +292,7 @@ console.log(f2.name) // a
 
 ## 原型链 `prototype`
 
-继承时，JavaScript 只有一种结构：对象。
+继承时，`JavaScript` 只有一种结构：对象。
 每个对象都有一个私有属性（称之为 [[Prototype]]），它持有一个连接到另一个称为其 `prototype` 对象（原型对象）的链接。
 该 `prototype` 对象又具有一个自己的原型，层层向上直到一个对象的原型为 `null`。
 根据定义，`null` 没有原型，并作为这个原型链中的最后一个环节。
@@ -328,7 +328,7 @@ f3.name = 'c'
 f3.logName() // name is c  只覆盖了 Foo 上的 name
 ```
 
-## `arguments` 函数隐含的参数，是所有参数构成的一个类数组
+## `arguments` 函数隐含的参数，是所有参数构成的一个类数组, 实质是 object
 
 ```js
 (function() {
@@ -349,7 +349,7 @@ f3.logName() // name is c  只覆盖了 Foo 上的 name
 
 ## `setTimeout` 和 `setInterval` 两者的区别
 
-- `setTimeout` 是过一定时间之后执行 `function，` 然后终止
+- `setTimeout` 是过一定时间之后执行 `function`， 然后终止
 - `setInterval` 是每过一段时间之后执行 `function`，清除用 `clearInterval(id)` 的方法
 
 `setTimeout` 与循环结合:
