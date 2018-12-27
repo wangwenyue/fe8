@@ -65,15 +65,31 @@ var a = b.concat([])
 ```js
 var a = [1,2,3, [1, 2, 3]]
 var b = a.slice()
-a === b // false
-a[0] === b[0] // true
+a === b // false 这个是应该的， b 和 a 是指向不同的地址
+a[3] === b[3] // true 指向同一个地址
 ```
-shallow clone 只拷贝一层，`[1, 2, 3]` 就会只拷贝地址了，当 `b[1]` 改变的时候，`a[1]` 会跟着一起变。
-shadow copy 说的是 array 的 elements, 而不是 array 本身; 返回的永远是个新的 array. 也就是说 `b` 是新返回的数组。
+shallow clone 只拷贝一层，`[1, 2, 3]` 就会只拷贝地址了，当 `b[3]` 改变的时候，`a[3]` 会跟着一起变。
+shadow copy 说的是 array 的 elements, 而**不是 array 本身**; 返回的永远是个新的 array. 也就是说 `b` 是新返回的数组。
 
 ### 深拷贝(deep clone)
 
-深拷贝一般用 JSON.parse(JSON.stringify(object)) 来解决。
+阮老师的 `deepCopy`
+
+```js
+const deepClone = (p, c={}) => {
+    Object.keys(p).forEach( k => {
+        if (typeof p[k] === 'object') {
+            c[k] = Array.isArray(p[k]) ? [] : {}
+            c[k] = deepClone(p[k])
+        } else {
+            c[k] = p[k]
+        }
+    })
+    return c
+}
+```
+
+`JSON.parse(JSON.stringify(object)) `有缺陷，比如 `function` 就无法拷贝
 
 ```JavaScript
 let a = {
@@ -86,27 +102,6 @@ let a = {
 let b = JSON.parse(JSON.stringify(a))
 a.jobs.first = 'native'
 console.log(b.jobs.first) // FE
-```
-
-另一种实现
-
-```js
-const deepClone = obj => {
-    let clone = {...obj}
-    Object.keys(clone).forEach( k => {
-        if (typeof obj[k] === 'object') {
-            clone[k] = deepClone(obj[k])
-        } else {
-            clone[k] = obj[k]
-        }
-    })
-    if (Array.isArray(obj)) {
-        clone.length = obj.length
-        return Array.from(clone)
-    } else {
-        return clone
-    }
-}
 ```
 
 更加专业的方法参考 [deepClone](https://github.com/wangwenyue/lodash-me/blob/master/example/function/deepClone.js)
